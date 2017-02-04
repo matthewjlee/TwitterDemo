@@ -16,8 +16,13 @@ class Tweet: NSObject {
     var favoritesCount: Int = 0
     var username: String?
     var screenName: String?
+    var profileURL: URL?
+    var tweetURL: URL?
     
     init(dictionary: NSDictionary) {
+        
+        print(dictionary)
+        
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favorite_count"] as? Int) ?? 0
@@ -25,6 +30,20 @@ class Tweet: NSObject {
         let user = dictionary["user"] as! NSDictionary
         username = user["name"] as? String
         screenName = user["screen_name"] as? String
+        
+        print("IN TWEET")
+        print(dictionary["media_url_https"] as? String)
+        let userentities = user["entities"] as? NSDictionary
+        let usermedia = userentities?["media"] as? NSDictionary
+        
+        //if let profileURLString = dictionary["media_url_https"] as? String {
+        if let profileURLString = usermedia?["media_url_https"] as? String {
+            profileURL = URL(string: profileURLString)
+            print(profileURLString)
+        } else {
+            print("NO IMAGE URL RECEIVED")
+        }
+        
         
         let timestampString = dictionary["created_at"] as? String
         
