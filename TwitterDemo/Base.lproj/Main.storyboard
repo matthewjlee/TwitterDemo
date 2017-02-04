@@ -67,15 +67,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="238"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpg-mB-Zft">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Tweet" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vpg-mB-Zft">
                                                     <rect key="frame" x="91" y="36" width="209" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="User" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjC-uk-BRs">
-                                                    <rect key="frame" x="91" y="8" width="39" height="21"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="752" text="User" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JjC-uk-BRs">
+                                                    <rect key="frame" x="91" y="8" width="35" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -136,14 +136,16 @@
                                                 <constraint firstAttribute="trailing" secondItem="Y0f-v1-boC" secondAttribute="trailing" constant="58" id="1zs-yb-E7U"/>
                                                 <constraint firstItem="00h-BN-JGh" firstAttribute="leading" secondItem="wLh-e1-8rN" secondAttribute="leading" constant="8" id="61w-Hr-Jnn"/>
                                                 <constraint firstAttribute="bottom" secondItem="287-Pf-ctg" secondAttribute="bottom" constant="8" id="7jf-4s-TjT"/>
+                                                <constraint firstItem="vpg-mB-Zft" firstAttribute="top" secondItem="Vmm-HC-Yyd" secondAttribute="bottom" constant="8" id="9KT-cH-F0I"/>
                                                 <constraint firstItem="Vmm-HC-Yyd" firstAttribute="top" secondItem="wLh-e1-8rN" secondAttribute="top" constant="10" id="9fc-oH-CHS"/>
                                                 <constraint firstAttribute="trailing" secondItem="vpg-mB-Zft" secondAttribute="trailing" constant="20" id="E8j-Mr-pJm"/>
                                                 <constraint firstItem="287-Pf-ctg" firstAttribute="leading" secondItem="wLh-e1-8rN" secondAttribute="leading" constant="91" id="J4i-YK-hmt"/>
                                                 <constraint firstItem="vpg-mB-Zft" firstAttribute="top" secondItem="JjC-uk-BRs" secondAttribute="bottom" constant="7" id="K7b-aP-YlB"/>
                                                 <constraint firstItem="a3p-za-8B4" firstAttribute="leading" secondItem="iYc-1o-xsf" secondAttribute="trailing" constant="16" id="KPh-CL-Abi"/>
+                                                <constraint firstItem="vpg-mB-Zft" firstAttribute="top" secondItem="nWp-Wo-XNd" secondAttribute="bottom" constant="12" id="LTV-Pm-gP1"/>
                                                 <constraint firstAttribute="bottom" secondItem="Y0f-v1-boC" secondAttribute="bottom" constant="14" id="Nds-R1-eWO"/>
                                                 <constraint firstAttribute="bottom" secondItem="iYc-1o-xsf" secondAttribute="bottom" constant="14" id="O7g-od-0bk"/>
-                                                <constraint firstItem="8ks-Qt-4Po" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vpg-mB-Zft" secondAttribute="bottom" constant="8" id="OQ8-6F-Vn5"/>
+                                                <constraint firstItem="8ks-Qt-4Po" firstAttribute="top" secondItem="vpg-mB-Zft" secondAttribute="bottom" constant="8" id="OQ8-6F-Vn5"/>
                                                 <constraint firstItem="8ks-Qt-4Po" firstAttribute="leading" secondItem="00h-BN-JGh" secondAttribute="trailing" constant="8" id="TYt-Tg-PdT"/>
                                                 <constraint firstItem="nWp-Wo-XNd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JjC-uk-BRs" secondAttribute="trailing" constant="8" id="ToI-BY-SOA"/>
                                                 <constraint firstItem="JjC-uk-BRs" firstAttribute="top" secondItem="wLh-e1-8rN" secondAttribute="top" constant="8" id="U2k-jR-Fr8"/>
