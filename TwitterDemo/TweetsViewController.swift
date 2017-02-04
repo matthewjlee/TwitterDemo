@@ -8,24 +8,25 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tweets: [Tweet]!
     
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
             TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
                 self.tweets = tweets
+                self.tableView.reloadData()
                 
-                for tweet in tweets {
-                    print(tweet.text)
-                }
             }, failure: { (error: Error) in
                 print(error.localizedDescription)
             })
-            
-            //client?.currentAccount()
+        
             
         
         // Do any additional setup after loading the view.
@@ -39,7 +40,29 @@ class TweetsViewController: UIViewController {
     @IBAction func onLogoutButton(_ sender: AnyObject) {
         TwitterClient.sharedInstance?.logout()
     }
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let tweets = tweets {
+            return tweets.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TwitterCell", for: indexPath) as! TwitterCell
+        
+        
+        let tweet = tweets[indexPath.row]
+        cell.tweetTextLabel.text = tweet.text
+        cell.retweetsLabel.text = "\(tweet.retweetCount)"
+        cell.favoritesLabel.text = "\(tweet.favoritesCount)"
+        cell.retweetImageView.image = #imageLiteral(resourceName: "retweet-icon")
+        cell.favoritesImageView.image = #imageLiteral(resourceName: "favor-icon")
+        cell.usernameLabel.text = tweet.username
+        cell.screenNameLabel.text = "@\(tweet.screenName!)"
+        
+        return cell
+    }
     /*
     // MARK: - Navigation
 
