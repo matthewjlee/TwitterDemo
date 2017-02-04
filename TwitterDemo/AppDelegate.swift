@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if User.currentUser != nil {
+            
+        }
         return true
     }
 
@@ -43,24 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        print(url.description)
-        
-        let requestToken = BDBOAuth1Credential(queryString: url.query)
-        let twitterClient = BDBOAuth1SessionManager(baseURL: URL(string: "https://api.twitter.com")!, consumerKey: "mRtbeFepeScOqHGAk8lGFnGSg", consumerSecret: "yYA8NvkFYK5HHlyjpU900AWoCckGgBulSXmjoy68rUoHFq89KT")
-        
-        twitterClient?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: {(accessToken: BDBOAuth1Credential?) -> Void in
-            print("I got the token!")
-            
-            twitterClient?.get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: {(task: URLSessionDataTask, response: Any?) -> Void in
-                print("account: \(response)")
-                let user = response as! NSDictionary
-                print("name: \(user["name"])")
-            }, failure: {(task: URLSessionDataTask?, error: Error) -> Void in
-            })
-        }, failure: {(error: Error?) -> Void
-            in
-            print("error: \(error?.localizedDescription)")
-        })
+
+        TwitterClient.sharedInstance?.handleOpenUrl(url: url)
         
         return true
     }
