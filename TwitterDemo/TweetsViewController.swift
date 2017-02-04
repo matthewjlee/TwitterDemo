@@ -60,7 +60,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.favoritesImageView.image = #imageLiteral(resourceName: "favor-icon")
         cell.usernameLabel.text = tweet.username
         cell.screenNameLabel.text = "@\(tweet.screenName!)"
-        
+        cell.timestampLabel.text = "\(tweet.timestamp!)"
         if let profileImageURL = tweet.profileImageURL as URL? {
             cell.profileImageView.setImageWith(profileImageURL)
         }

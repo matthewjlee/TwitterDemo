@@ -13,6 +13,7 @@ class TwitterCell: UITableViewCell {
     
     @IBOutlet weak var tweetTextLabel: UILabel!
     
+    @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var favoritesImageView: UIImageView!
     @IBOutlet weak var retweetImageView: UIImageView!
     @IBOutlet weak var retweetsLabel: UILabel!
@@ -26,6 +27,8 @@ class TwitterCell: UITableViewCell {
         // Initialization code
         profileImageView.layer.cornerRadius = 3
         profileImageView.clipsToBounds = true
+        tweetImageView.layer.cornerRadius = 3
+        tweetImageView.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
