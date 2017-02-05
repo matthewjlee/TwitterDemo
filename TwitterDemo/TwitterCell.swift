@@ -49,7 +49,7 @@ class TwitterCell: UITableViewCell {
             
         }, failure: { (error: Error) in
             print(error.localizedDescription)
-        }, tweetID: tweetID2)
+        }, tweetID: tweetID)
     }
     
     @IBAction func onFavorite(_ sender: AnyObject) {
