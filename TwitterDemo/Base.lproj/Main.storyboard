@@ -100,8 +100,8 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timestamp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmm-HC-Yyd">
-                                                    <rect key="frame" x="239" y="10" width="73" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vmm-HC-Yyd">
+                                                    <rect key="frame" x="282" y="10" width="30" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -120,6 +120,9 @@
                                                     </constraints>
                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <state key="normal" image="retweet-icon"/>
+                                                    <connections>
+                                                        <action selector="onRetweet:" destination="37D-Mq-aYo" eventType="touchUpInside" id="Nur-xK-7hC"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqY-L0-lZ3">
                                                     <rect key="frame" x="189" y="219" width="30" height="30"/>
@@ -129,6 +132,9 @@
                                                     </constraints>
                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <state key="normal" image="favor-icon"/>
+                                                    <connections>
+                                                        <action selector="onFavorite:" destination="37D-Mq-aYo" eventType="touchUpInside" id="mKe-zO-VCm"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorites" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y0f-v1-boC">
                                                     <rect key="frame" x="218" y="230" width="44" height="12"/>
@@ -174,7 +180,6 @@
                                             <outlet property="retweetButton" destination="CpV-1u-SGR" id="maT-jk-npE"/>
                                             <outlet property="retweetsLabel" destination="iYc-1o-xsf" id="acb-aZ-PuF"/>
                                             <outlet property="screenNameLabel" destination="nWp-Wo-XNd" id="dZ9-Bf-7qq"/>
-                                            <outlet property="testBUtton" destination="CpV-1u-SGR" id="PDW-jm-Aqo"/>
                                             <outlet property="timestampLabel" destination="Vmm-HC-Yyd" id="WiJ-6Q-tpI"/>
                                             <outlet property="tweetImageView" destination="8ks-Qt-4Po" id="qZQ-VM-YLD"/>
                                             <outlet property="tweetTextLabel" destination="vpg-mB-Zft" id="jh7-s3-kH1"/>

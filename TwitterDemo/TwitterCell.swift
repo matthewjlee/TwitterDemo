@@ -11,6 +11,7 @@ import UIKit
 class TwitterCell: UITableViewCell {
 
     
+    var tweetID: Int = 0
     
     @IBOutlet weak var tweetTextLabel: UILabel!
     
@@ -41,4 +42,20 @@ class TwitterCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func onRetweet(_ sender: AnyObject) {
+        print("ID:\(tweetID)")
+        TwitterClient.sharedInstance?.retweet(success: { (user: User) in
+            
+        }, failure: { (error: Error) in
+            
+        })
+    }
+    
+    @IBAction func onFavorite(_ sender: AnyObject) {
+        TwitterClient.sharedInstance?.favorite(success: { (user: User) in
+            
+        }, failure: { (error:Error) in
+            
+        })
+    }
 }

@@ -51,6 +51,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TwitterCell", for: indexPath) as! TwitterCell
         
+        
         let tweet = tweets[indexPath.row]
         cell.tweetTextLabel.text = tweet.text
         cell.retweetsLabel.text = "\(tweet.retweetCount)"
@@ -66,9 +67,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.tweetImageView.setImageWith(tweetImageURL)
         }
         
-        
+        cell.tweetID = tweet.tweetID
+        print("ID:\(tweet.tweetID) \t row: \(indexPath.row)")
         return cell
     }
+    
+    
     /*
     // MARK: - Navigation
 
