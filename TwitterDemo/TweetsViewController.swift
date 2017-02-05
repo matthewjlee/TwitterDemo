@@ -51,13 +51,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TwitterCell", for: indexPath) as! TwitterCell
         
-        
         let tweet = tweets[indexPath.row]
         cell.tweetTextLabel.text = tweet.text
         cell.retweetsLabel.text = "\(tweet.retweetCount)"
         cell.favoritesLabel.text = "\(tweet.favoritesCount)"
-        cell.retweetImageView.image = #imageLiteral(resourceName: "retweet-icon")
-        cell.favoritesImageView.image = #imageLiteral(resourceName: "favor-icon")
         cell.usernameLabel.text = tweet.username
         cell.screenNameLabel.text = "@\(tweet.screenName!)"
         cell.timestampLabel.text = tweet.timestamp

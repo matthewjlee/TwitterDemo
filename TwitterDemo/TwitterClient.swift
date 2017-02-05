@@ -37,6 +37,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userDidLogoutNotification), object: nil)
     }
+    
+    
     func handleOpenUrl(url: URL) {
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         
@@ -86,5 +88,13 @@ class TwitterClient: BDBOAuth1SessionManager {
         }, failure: {(task: URLSessionDataTask?, error: Error) -> Void in
             failure(error)
         })
+    }
+    
+    func retweet(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
+        post("1.1/statuses/retweet/:id.json", parameters: 123, progress: nil, success: { (task: URLSessionDataTask, respone: Any?) in
+            
+        }) { (task: URLSessionDataTask?, error: Error) in
+            failure(error)
+        }
     }
 }

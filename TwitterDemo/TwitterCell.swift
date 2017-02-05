@@ -11,17 +11,21 @@ import UIKit
 class TwitterCell: UITableViewCell {
 
     
+    
     @IBOutlet weak var tweetTextLabel: UILabel!
     
     @IBOutlet weak var timestampLabel: UILabel!
-    @IBOutlet weak var favoritesImageView: UIImageView!
-    @IBOutlet weak var retweetImageView: UIImageView!
+    
+    @IBOutlet weak var retweetButton: UIButton!
+    
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var retweetsLabel: UILabel!
     @IBOutlet weak var favoritesLabel: UILabel!
     @IBOutlet weak var screenNameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var tweetImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
