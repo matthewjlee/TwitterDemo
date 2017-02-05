@@ -12,6 +12,7 @@ class TwitterCell: UITableViewCell {
 
     
     var tweetID: Int = 0
+    var tweetID2: String?
     
     @IBOutlet weak var tweetTextLabel: UILabel!
     
@@ -44,18 +45,18 @@ class TwitterCell: UITableViewCell {
 
     @IBAction func onRetweet(_ sender: AnyObject) {
         print("ID:\(tweetID)")
-        TwitterClient.sharedInstance?.retweet(success: { (user: User) in
+        TwitterClient.sharedInstance?.retweet(success: { (tweet: Tweet) in
             
         }, failure: { (error: Error) in
-            
-        })
+            print(error.localizedDescription)
+        }, tweetID: tweetID2)
     }
     
     @IBAction func onFavorite(_ sender: AnyObject) {
-        TwitterClient.sharedInstance?.favorite(success: { (user: User) in
+        TwitterClient.sharedInstance?.favorite(success: { (tweet: Tweet) in
             
         }, failure: { (error:Error) in
-            
-        })
+            print(error.localizedDescription)
+        }, tweetID: tweetID)
     }
 }

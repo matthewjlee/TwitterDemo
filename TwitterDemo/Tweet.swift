@@ -19,6 +19,7 @@ class Tweet: NSObject {
     var profileImageURL: URL?
     var tweetImageURL: URL?
     var tweetID: Int = 0
+    var tweetID2: String?
     
     init(dictionary: NSDictionary) {
         
@@ -29,6 +30,7 @@ class Tweet: NSObject {
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favorite_count"] as? Int) ?? 0
         tweetID = (dictionary["id"] as? Int) ?? 0
+        tweetID2 = dictionary["id_str"] as? String
         
         let timestampString = dictionary["created_at"] as? String
         

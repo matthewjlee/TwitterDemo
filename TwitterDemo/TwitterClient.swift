@@ -25,7 +25,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         TwitterClient.sharedInstance?.fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: URL(string: "twitterdemo://oauth"), scope: nil, success: {(requestToken:BDBOAuth1Credential?) -> Void in
             let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken!.token!)")!
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            //UIApplication.shared.openURL(url)
+            
         }, failure: { (error: Error?) -> Void in
             print("error: \(error!.localizedDescription)")
             self.loginFailure?(error!)
@@ -91,16 +91,20 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func retweet(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
-        /*post("1.1/statuses/retweet/:id.json", parameters: 123, progress: nil, success: { (task: URLSessionDataTask, respone: Any?) in
-            
+    func retweet(success: @escaping (Tweet) -> (), failure: @escaping (Error) -> (), tweetID: String?) {
+        
+        post("1.1/statuses/retweet/:id.json", parameters: tweetID, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("ABC@!@#$@")
+            let dictionary = response as! NSDictionary
+            print(dictionary)
         }) { (task: URLSessionDataTask?, error: Error) in
+            
             failure(error)
-        }*/
+        }
     }
     
-    func favorite(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
-       /* post("1.1/favorites/create.json?id=243138128959913986", parameters: 123, progress: nil, success: { (task: URLSessionDataTask, respone: Any?) in
+    func favorite(success: @escaping (Tweet) -> (), failure: @escaping (Error) -> (), tweetID: Int) {
+       /* post("1.1/favorites/create.json?id=243138128959913986", parameters: tweetID, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
         }) { (task: URLSessionDataTask?, error: Error) in
             failure(error)

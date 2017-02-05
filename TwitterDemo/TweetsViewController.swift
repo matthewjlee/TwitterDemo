@@ -19,13 +19,13 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.delegate = self
         tableView.dataSource = self
         
-            TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
-                self.tweets = tweets
-                self.tableView.reloadData()
-                
-            }, failure: { (error: Error) in
-                print(error.localizedDescription)
-            })
+        TwitterClient.sharedInstance?.homeTimeline(success: { (tweets: [Tweet]) in
+            self.tweets = tweets
+            self.tableView.reloadData()
+            
+        }, failure: { (error: Error) in
+            print(error.localizedDescription)
+        })
         
             
         
@@ -68,6 +68,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
         cell.tweetID = tweet.tweetID
+        cell.tweetID2 = tweet.tweetID2
         print("ID:\(tweet.tweetID) \t row: \(indexPath.row)")
         return cell
     }
