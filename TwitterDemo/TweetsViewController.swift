@@ -73,6 +73,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.tweetID = tweet.tweetID
         cell.tweetID2 = tweet.tweetID2
         print("ID:\(tweet.tweetID) \t row: \(indexPath.row)")
+        
         return cell
     }
     

@@ -93,20 +93,49 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func retweet(success: @escaping (Tweet) -> (), failure: @escaping (Error) -> (), tweetID: Int) {
         
-        post("1.1/statuses/retweet/:id.json", parameters: tweetID, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        post("1.1/statuses/retweet/\(tweetID).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("here")
             
+            let dictionary = response as! NSDictionary
+            
+            let tweet = Tweet(dictionary: dictionary)
+            
+            success(tweet)
             
         }) { (task: URLSessionDataTask?, error: Error) in
-            
-            
+            print("retweetfail")
+            failure(error)
         }
     }
     
     func favorite(success: @escaping (Tweet) -> (), failure: @escaping (Error) -> (), tweetID: Int) {
-       /* post("1.1/favorites/create.json?id=243138128959913986", parameters: tweetID, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        post("1.1/favorites/create.json", parameters: ["id":tweetID], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("favorited")
+            
+            let dictionary = response as! NSDictionary
+            
+            let tweet = Tweet(dictionary: dictionary)
+            
+            success(tweet)
+        }) { (task: URLSessionDataTask?, error: Error) in
+            
+            failure(error)
+        }
+    }
+    
+    func unfavorite(success: @escaping (Tweet) -> (), failure: @escaping (Error) -> (), tweetID: Int) {
+        post("1.1/favorites/destroy.json", parameters: ["id":tweetID], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            print("unfavorited")
+            
+            let dictionary = response as! NSDictionary
+            
+            let tweet = Tweet(dictionary: dictionary)
+            
+            success(tweet)
             
         }) { (task: URLSessionDataTask?, error: Error) in
+            print("unfavoritefail")
             failure(error)
-        }*/
+        }
     }
 }
