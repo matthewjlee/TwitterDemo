@@ -11,6 +11,7 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tweets: [Tweet]!
+    var currentDate: Date!
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -29,8 +30,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }, failure: { (error: Error) in
             print(error.localizedDescription)
         })
-        
-            
         
         // Do any additional setup after loading the view.
     }
@@ -66,13 +65,30 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.profileImageView.setImageWith(profileImageURL)
         }
         
+        DispatchQueue.main.async {
+            print("ABCDCEFG\trow:\(indexPath.row)")
+            if tweet.retweetStatus == true {
+                cell.retweetsLabel.textColor = UIColor.green
+                cell.retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: UIControlState.normal)
+            } else {
+                cell.retweetsLabel.textColor = UIColor.black
+                cell.retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon"), for: UIControlState.normal)
+            }
+            
+            if tweet.favoriteStatus == true {
+                cell.favoritesLabel.textColor = UIColor.red
+                cell.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
+            } else {
+                cell.favoritesLabel.textColor = UIColor.black
+                cell.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: UIControlState.normal)
+            }
+        }
+        
         if let tweetImageURL = tweet.tweetImageURL as URL? {
             cell.tweetImageView.setImageWith(tweetImageURL)
         }
         
         cell.tweetID = tweet.tweetID
-        cell.tweetID2 = tweet.tweetID2
-        print("ID:\(tweet.tweetID) \t row: \(indexPath.row)")
         
         return cell
     }

@@ -12,7 +12,6 @@ class TwitterCell: UITableViewCell {
 
     
     var tweetID: Int = 0
-    var tweetID2: String?
     
     @IBOutlet weak var tweetTextLabel: UILabel!
     
@@ -61,26 +60,44 @@ class TwitterCell: UITableViewCell {
     }
     
     @IBAction func onFavorite(_ sender: AnyObject) {
+        
         self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
         self.favoritesLabel.textColor = UIColor.red
+        
+        
         TwitterClient.sharedInstance?.favorite(success: { (tweet: Tweet) in
             print("favorite")
             print(tweet.favoritesCount)
             self.favoritesLabel.text = "\(tweet.favoritesCount)"
             
+            var date = Date()
+            let formatter = DateFormatter()
+            formatter.timeZone = NSTimeZone.local
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+            let time = formatter.string(from: date)
+            
+            print("time:\(time)")
+            
+            
+            print("date: \(date)")
+            date = formatter.date(from: time)!
+            print("updated Date: \(date)")
         }, failure: { (error:Error) in
             self.unfavorite()
         }, tweetID: tweetID)
+        
+        
     }
     
     func unfavorite() {
+        
         self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: UIControlState.normal)
         self.favoritesLabel.textColor = UIColor.black
+        
         TwitterClient.sharedInstance?.unfavorite(success: { (tweet: Tweet) in
             print("unfavorite")
             print(tweet.favoritesCount)
             self.favoritesLabel.text = "\(tweet.favoritesCount)"
-            
         }, failure: { (error:Error) in
             print(error.localizedDescription)
         }, tweetID: tweetID)

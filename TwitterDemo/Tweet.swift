@@ -19,7 +19,8 @@ class Tweet: NSObject {
     var profileImageURL: URL?
     var tweetImageURL: URL?
     var tweetID: Int = 0
-    var tweetID2: String?
+    var favoriteStatus: Bool?
+    var retweetStatus: Bool?
     
     init(dictionary: NSDictionary) {
         
@@ -30,7 +31,8 @@ class Tweet: NSObject {
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoritesCount = (dictionary["favorite_count"] as? Int) ?? 0
         tweetID = (dictionary["id"] as? Int) ?? 0
-        tweetID2 = dictionary["id_str"] as? String
+        favoriteStatus = dictionary["favorited"] as? Bool
+        retweetStatus = dictionary["favorited"] as? Bool
         
         let timestampString = dictionary["created_at"] as? String
         
@@ -42,7 +44,19 @@ class Tweet: NSObject {
             
             formatter.dateFormat = "d MMM YY"
             
-            timestamp = formatter.string(from: retrievedDate)
+            let elapsed = Int(Date().timeIntervalSince(retrievedDate))
+            
+            if elapsed/60 == 0 {
+                timestamp = "\(elapsed)s"
+            } else if elapsed/3600 == 0 {
+                timestamp = "\(elapsed/60)m"
+            } else if elapsed/86400 == 0 {
+                timestamp = "\(elapsed/3600)h"
+            } else if elapsed/604800 == 0 {
+                timestamp = "\(elapsed/86400)d"
+            } else {
+                timestamp = formatter.string(from: retrievedDate)
+            }
             
         }
         
@@ -54,10 +68,10 @@ class Tweet: NSObject {
             self.profileImageURL = URL(string: profileURLString)
         }
         
-        let entities = dictionary["entities"] as! NSDictionary
-        let media = entities["media"] as! NSArray
-        let mediaItems = media[0] as! NSDictionary
-        let tweetImageURLString = mediaItems["media_url_https"] as? String
+        let entities = dictionary["entities"] as? NSDictionary
+        let media = entities?["media"] as? NSArray
+        let mediaItems = media?[0] as? NSDictionary
+        let tweetImageURLString = mediaItems?["media_url_https"] as? String
         
         if let tweetImageURLString = tweetImageURLString {
             self.tweetImageURL = URL(string: tweetImageURLString)
