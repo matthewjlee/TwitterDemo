@@ -70,18 +70,6 @@ class TwitterCell: UITableViewCell {
             print(tweet.favoritesCount)
             self.favoritesLabel.text = "\(tweet.favoritesCount)"
             
-            var date = Date()
-            let formatter = DateFormatter()
-            formatter.timeZone = NSTimeZone.local
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-            let time = formatter.string(from: date)
-            
-            print("time:\(time)")
-            
-            
-            print("date: \(date)")
-            date = formatter.date(from: time)!
-            print("updated Date: \(date)")
         }, failure: { (error:Error) in
             self.unfavorite()
         }, tweetID: tweetID)

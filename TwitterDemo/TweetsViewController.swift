@@ -60,9 +60,34 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.favoritesLabel.text = "\(tweet.favoritesCount)"
         cell.usernameLabel.text = tweet.username
         cell.screenNameLabel.text = "@\(tweet.screenName!)"
-        cell.timestampLabel.text = tweet.timestamp
+        
+        
+        let date = tweet.timestamp
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d MMM YY"
+        
+        let elapsed = Int(Date().timeIntervalSince(date!))
+        
+        var timestamp: String?
+        if elapsed/60 == 0 {
+            timestamp = "\(elapsed)s"
+        } else if elapsed/3600 == 0 {
+            timestamp = "\(elapsed/60)m"
+        } else if elapsed/86400 == 0 {
+            timestamp = "\(elapsed/3600)h"
+        } else if elapsed/604800 == 0 {
+            timestamp = "\(elapsed/86400)d"
+        } else {
+            timestamp = formatter.string(from: date!)
+        }
+        
+        cell.timestampLabel.text = timestamp
         if let profileImageURL = tweet.profileImageURL as URL? {
             cell.profileImageView.setImageWith(profileImageURL)
+        }
+        
+        if let tweetImageURL = tweet.tweetImageURL as URL? {
+            cell.tweetImageView.setImageWith(tweetImageURL)
         }
         
         DispatchQueue.main.async {
@@ -84,24 +109,31 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-        if let tweetImageURL = tweet.tweetImageURL as URL? {
-            cell.tweetImageView.setImageWith(tweetImageURL)
-        }
         
-        cell.tweetID = tweet.tweetID
         
         return cell
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let tweet = tweets[indexPath!.row]
+        
+        let detailViewController = segue.destination as! TweetsDetailsViewController
+        detailViewController.tweet = tweet
     }
-    */
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
 
 }
