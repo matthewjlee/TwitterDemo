@@ -147,6 +147,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         } else {
             post("1.1/statuses/update.json", parameters: ["status": status], progress: nil, success: { (task:URLSessionDataTask, response:Any?) in
                 print("posted status")
+                success()
             }, failure: { (task: URLSessionDataTask?, error:Error) in
                 print("post status fail")
                 failure(error)

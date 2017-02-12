@@ -14,7 +14,7 @@ class User: NSObject {
     
     var name: String?
     var screenname: String?
-    var profileUrl: NSURL?
+    var profileUrl: URL?
     var tagline: String?
     var userID: Int?
     var tweetCount: Int = 0
@@ -33,14 +33,14 @@ class User: NSObject {
         
         let profileUrlString = dictionary["profile_image_url_https"] as? String
         if let profileUrlString = profileUrlString {
-            profileUrl = NSURL(string: profileUrlString)
+            profileUrl = URL(string: profileUrlString)
         }
         
         tagline = dictionary["description"] as? String
-        userID = (dictionary["id"] as? Int) ?? 0
-        tweetCount = (dictionary["id"] as? Int) ?? 0
-        followingCount = (dictionary["id"] as? Int) ?? 0
-        followersCount = (dictionary["id"] as? Int) ?? 0
+        userID = dictionary["id"] as? Int
+        tweetCount = (dictionary["statuses_count"] as? Int) ?? 0
+        followingCount = (dictionary["friends_count"] as? Int) ?? 0
+        followersCount = (dictionary["followers_count"] as? Int) ?? 0
     }
     
     static var _currentUser: User?

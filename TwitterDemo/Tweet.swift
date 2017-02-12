@@ -21,6 +21,7 @@ class Tweet: NSObject {
     var tweetID: Int = 0
     var favoriteStatus: Bool?
     var retweetStatus: Bool?
+    var userID: Int?
     
     init(dictionary: NSDictionary) {
         
@@ -49,6 +50,7 @@ class Tweet: NSObject {
         username = user["name"] as? String
         screenName = user["screen_name"] as? String
 
+        userID = user["id"] as? Int
         if let profileURLString = user["profile_image_url_https"] as? String {
             self.profileImageURL = URL(string: profileURLString)
         }

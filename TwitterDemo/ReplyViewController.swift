@@ -23,7 +23,11 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
         charCountLabel.text = "\(remainingCharCount)"
         replyTextView.delegate = self
         replyTextView.becomeFirstResponder()
-        replyTextView.text = "@\(replyUsername!) "
+        if let replyUsername = replyUsername {
+            replyTextView.text = "@\(replyUsername) "
+        } else {
+            replyTextView.text = ""
+        }
     }
 
     override func didReceiveMemoryWarning() {

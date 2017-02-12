@@ -13,6 +13,7 @@ class TweetsDetailsViewController: UIViewController {
     var tweet: Tweet!
     var tweetID: Int = 0
     
+    @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var tweetImageView: UIImageView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -37,6 +38,7 @@ class TweetsDetailsViewController: UIViewController {
         tweetLabel.text = tweet.text
         if let profileImageURL = tweet.profileImageURL as URL? {
             profileImageView.setImageWith(profileImageURL)
+            profileImageButton.setImageFor(UIControlState.normal, with: profileImageURL)
         }
         
         if let tweetImageURL = tweet.tweetImageURL as URL? {
@@ -128,10 +130,17 @@ class TweetsDetailsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? ReplyViewController {
+            let replyViewController = destination
+            replyViewController.replyUsername = tweet.screenName
+            replyViewController.replyTweetID = tweet.tweetID
+        }
         
-        let replyViewController = segue.destination as! ReplyViewController
-        replyViewController.replyUsername = tweet.screenName
-        replyViewController.replyTweetID = tweet.tweetID
+        if let destination = segue.destination as? ProfileViewController {
+            let profileViewController = destination
+            profileViewController.userID = tweet.userID
+            profileViewController.isProfile = false
+        }
         
     }
     

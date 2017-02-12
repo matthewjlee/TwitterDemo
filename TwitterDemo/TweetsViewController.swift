@@ -83,6 +83,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.timestampLabel.text = timestamp
         if let profileImageURL = tweet.profileImageURL as URL? {
             cell.profileImageView.setImageWith(profileImageURL)
+            cell.profileImageButton.setImageFor(UIControlState.normal, with: profileImageURL)
         }
         
         if let tweetImageURL = tweet.tweetImageURL as URL? {
@@ -123,6 +124,7 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Pass the selected object to the new view controller.
         
         if let sender = sender as? UITableViewCell {
+            print("here2")
             let cell = sender
             let indexPath = tableView.indexPath(for: cell)
             let tweet = tweets[indexPath!.row]
@@ -134,6 +136,23 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let sender = sender as? UIBarButtonItem {
             let profileViewController = segue.destination as! ProfileViewController
             profileViewController.userID = User.currentUser?.userID
+            profileViewController.isProfile = true
+            
+        }
+        
+        if let sender = sender as? UIButton {
+            let button = sender
+            if let superview = button.superview {
+                if let cell = superview.superview as? TwitterCell {
+                    let indexPath = tableView.indexPath(for: cell)
+                    let tweet = tweets[indexPath!.row]
+                    
+                    let profileViewController = segue.destination as! ProfileViewController
+                    profileViewController.userID = tweet.userID
+                    profileViewController.isProfile = false
+                }
+            }
+            print("here")
         }
     }
     

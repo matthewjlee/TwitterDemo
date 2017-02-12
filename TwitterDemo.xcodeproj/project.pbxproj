@@ -130,6 +130,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7527ABA41E507F1800794952 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				752052581E504FDE003C6DB8 /* ProfileTweetCell.swift */,
+				754684B21E45EF2500A7C490 /* TwitterCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		752DC53D1E456C0E00E65C0C = {
 			isa = PBXGroup;
 			children = (
@@ -155,16 +164,15 @@
 		752DC5481E456C0E00E65C0C /* TwitterDemo */ = {
 			isa = PBXGroup;
 			children = (
+				7527ABA41E507F1800794952 /* Views */,
 				752DC5791E45991400E65C0C /* API */,
 				752DC57A1E45991A00E65C0C /* View Controllers */,
 				752DC57B1E45992100E65C0C /* Models */,
 				752DC5491E456C0E00E65C0C /* AppDelegate.swift */,
-				754684B21E45EF2500A7C490 /* TwitterCell.swift */,
 				752DC54D1E456C0E00E65C0C /* Main.storyboard */,
 				752DC5501E456C0E00E65C0C /* Assets.xcassets */,
 				752DC5521E456C0E00E65C0C /* LaunchScreen.storyboard */,
 				752DC5551E456C0E00E65C0C /* Info.plist */,
-				752052581E504FDE003C6DB8 /* ProfileTweetCell.swift */,
 			);
 			path = TwitterDemo;
 			sourceTree = "<group>";
