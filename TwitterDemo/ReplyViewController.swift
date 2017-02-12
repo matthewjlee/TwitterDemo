@@ -10,14 +10,20 @@ import UIKit
 
 class ReplyViewController: UIViewController, UITextViewDelegate {
     
+    var replyTweetID: Int?
+    var replyUsername: String?
+    @IBOutlet weak var tweetButton: UIButton!
     var remainingCharCount: Int = 140
     @IBOutlet weak var charCountLabel: UILabel!
     @IBOutlet weak var replyTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
         charCountLabel.text = "\(remainingCharCount)"
         replyTextView.delegate = self
-        // Do any additional setup after loading the view.
+        replyTextView.becomeFirstResponder()
+        replyTextView.text = "@\(replyUsername!) "
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,21 +32,28 @@ class ReplyViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func onCancel(_ sender: AnyObject) {
-        /*UIViewController *sourceViewController = self.sourceViewController;
-        [sourceViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-        */
-        
         self.presentingViewController?.dismiss(animated: true, completion: nil)
         
     }
 
+    @IBAction func onTweet(_ sender: AnyObject) {
+        TwitterClient.sharedInstance?.updateStatus(success: { () in
+            print("reply success")
+            self.presentingViewController?.dismiss(animated: true, completion: nil)
+            
+        }, failure: { (error:Error) in
+            print(error.localizedDescription)
+        }, status: replyTextView.text, replyTweetID: replyTweetID)
+    }
     func textViewDidChange(_ textView: UITextView) {
         remainingCharCount = 140 - (replyTextView.text?.characters.count)!
         charCountLabel.text = "\(remainingCharCount)"
         if(remainingCharCount < 0) {
             charCountLabel.textColor = UIColor.red
+            tweetButton.isEnabled = false
         } else {
             charCountLabel.textColor = UIColor.lightGray
+            tweetButton.isEnabled = true
         }
     }
     func textViewDidEndEditing(_ textView: UITextView) {

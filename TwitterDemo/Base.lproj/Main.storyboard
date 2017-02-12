@@ -275,6 +275,9 @@
                                         <rect key="frame" x="266" y="26" width="42" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Tweet"/>
+                                        <connections>
+                                            <action selector="onTweet:" destination="7RU-2X-WI1" eventType="touchUpInside" id="yx5-aE-xY3"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="charCt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fM-SJ-lWB">
                                         <rect key="frame" x="206" y="31" width="52" height="21"/>
@@ -299,6 +302,7 @@
                     <connections>
                         <outlet property="charCountLabel" destination="9fM-SJ-lWB" id="yIl-BH-gS9"/>
                         <outlet property="replyTextView" destination="yik-aV-dOo" id="5JW-cV-UMD"/>
+                        <outlet property="tweetButton" destination="B7L-Cr-OKB" id="pdv-6j-Sal"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IIN-dd-ckZ" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -129,8 +129,28 @@ class TwitterClient: BDBOAuth1SessionManager {
             success(tweet)
             
         }) { (task: URLSessionDataTask?, error: Error) in
-            print("unfavoritefail")
+            print("unfavorite fail")
             failure(error)
+        }
+    }
+    
+    func updateStatus(success: @escaping () -> (), failure: @escaping (Error) -> (), status: String, replyTweetID: Int?) {
+        if let replyTweetID = replyTweetID {
+            post("1.1/statuses/update.json", parameters: ["status": status, "in_reply_to_status_id": replyTweetID], progress: nil, success: { (task:URLSessionDataTask, response:Any?) in
+                print("posted reply")
+                success()
+            }, failure: { (task: URLSessionDataTask?, error:Error) in
+                print("reply fail")
+                failure(error)
+            })
+            
+        } else {
+            post("1.1/statuses/update.json", parameters: ["status": status], progress: nil, success: { (task:URLSessionDataTask, response:Any?) in
+                print("posted status")
+            }, failure: { (task: URLSessionDataTask?, error:Error) in
+                print("post status fail")
+                failure(error)
+            })
         }
     }
 }
