@@ -11,9 +11,8 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tweets: [Tweet]!
-    var currentDate: Date!
-    
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,12 +122,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPath(for: cell)
-        let tweet = tweets[indexPath!.row]
+        if let sender = sender as? UITableViewCell {
+            let cell = sender
+            let indexPath = tableView.indexPath(for: cell)
+            let tweet = tweets[indexPath!.row]
         
-        let detailViewController = segue.destination as! TweetsDetailsViewController
-        detailViewController.tweet = tweet
+            let detailViewController = segue.destination as! TweetsDetailsViewController
+            detailViewController.tweet = tweet
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
