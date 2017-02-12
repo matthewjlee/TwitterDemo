@@ -16,6 +16,28 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var tweetCountLabel: UILabel!
     @IBOutlet weak var followingCountLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
+    
+    var userID: Int?
+    override func viewWillAppear(_ animated: Bool) {
+        TwitterClient.sharedInstance?.userLookup(success: { (users: [User]) in
+            let user = users[0]
+            usernameLabel = user.name
+            screennameLabel = "@\(user.screenname!)"
+            if let profileImageURL = user.profileUrl {
+                profileImageView.setImageWith(profileImageURL)
+            }
+            
+        }, failure: { (error:Error) in
+            print(error.localizedDescription)
+        }, userID: userID!)
+        
+        TwitterClient.sharedInstance?.userTimeline(success: { (tweets:[Tweet]) in
+            print(tweets)
+        }, failure: { (errorError) in
+            print(error.localizedDescription)
+        }, userID: userID!)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

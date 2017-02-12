@@ -131,6 +131,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             detailViewController.tweet = tweet
         }
         
+        if let sender = sender as? UIBarButtonItem {
+            let profileViewController = segue.destination as! ProfileViewController
+            profileViewController.userID = User.currentUser?.userID
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

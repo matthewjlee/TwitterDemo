@@ -16,13 +16,18 @@ class User: NSObject {
     var screenname: String?
     var profileUrl: NSURL?
     var tagline: String?
+    var userID: Int?
+    var tweetCount: Int = 0
+    var followingCount: Int = 0
+    var followersCount: Int = 0
 
     var dictionary: NSDictionary?
     
     init(dictionary: NSDictionary) {
         
         self.dictionary = dictionary
-        
+        print("IN USER")
+        print(dictionary)
         name = dictionary["name"] as? String
         screenname = dictionary["screen_name"] as? String
         
@@ -32,6 +37,10 @@ class User: NSObject {
         }
         
         tagline = dictionary["description"] as? String
+        userID = (dictionary["id"] as? Int) ?? 0
+        tweetCount = (dictionary["id"] as? Int) ?? 0
+        followingCount = (dictionary["id"] as? Int) ?? 0
+        followersCount = (dictionary["id"] as? Int) ?? 0
     }
     
     static var _currentUser: User?
@@ -73,4 +82,17 @@ class User: NSObject {
             defaults.synchronize()
         }
     }
+    
+    class func usersWithArray(dictionaries: [NSDictionary]) -> [User] {
+        var users = [User]()
+        
+        for dictionary in dictionaries {
+            let user = User(dictionary: dictionary)
+            
+            users.append(user)
+        }
+        
+        return users
+    }
+
 }
